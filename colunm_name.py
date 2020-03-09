@@ -2,38 +2,42 @@ __author__ = 'vinodkumar545'
 
 from random import randint
 
+"""
+Identify the Excel Colunm name from the integer number
+
+return Colunm name
+
+"""
+
 class Solution:
 	def getColumnName(self, num):
 
-		div, rem = divmod(num, 26)
-		# print(div, rem)
-
 		string = ''
 
-		if rem == 0:
-			string = 'Z'
+		if num == 0:
+			return string
 
-			while(div > 25):
-				d, r = divmod(div, 26)
-				if r == 0:
-					string = "Z" + string
-				else:
-					string = chr(96 + r).upper() + string
-				div = d
 		else:
-			string = chr(96 + rem).upper()
+			n = num
+			while(n > 0):
+				div, rem = divmod(n, 26)
+				print(n, div, rem)
+				
+				if rem == 0:
+					string = "Z" + string
 
-			while(div > 0):
-				d, r = divmod(div, 26)
-				string = chr(96 + r).upper() + string
+					if div <= 26: div = div - 1
 
-				div = d
+				else:
+					string = chr(96 + rem).upper() + string
+					
+				n = div
 
 		print("Number: %s"%(num))
 		print("Column: %s"%(string))
 
 solution = Solution()
-num = randint(1, 10000)
+num = randint(1, 9999999)
 
 solution.getColumnName(num)
 
